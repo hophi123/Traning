@@ -1,0 +1,12 @@
+.main {
+    background-color: #E8E8E8;
+}
+table, th, td {
+    border: 1px solid;
+}
+table {
+    border-collapse: collapse;
+    width: 95%;
+    margin-left: 10px;
+    background-color: white;
+}

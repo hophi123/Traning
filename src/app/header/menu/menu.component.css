@@ -1,0 +1,22 @@
+.menu-bar {
+    height: 50px;
+    background-color: #F1F1F1;
+}
+.menu-bar ul {
+    margin: 0px;
+    padding: 0px;
+}
+.menu-bar ul li {
+    display: inline-block;
+    line-height: 50px;
+    text-align: center;
+    width: 100px;
+}
+.menu-bar ul li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+.menu-bar ul li a:focus {
+    border-bottom: red 1.5px solid;
+}

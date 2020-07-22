@@ -1,0 +1,22 @@
+<div class="main">
+<div class="teacher-body">
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Tên</th>
+            <th>Khoa</th>
+            <th>Phone</th>
+            <th>Mail</th>
+            <th>Ngày sinh</th>
+        </tr>
+        <tr *ngFor="let teacher of teachers">
+            <td>{{teacher.id}}</td>
+            <td>{{teacher.name}}</td>
+            <td>{{teacher.khoa}}</td>
+            <td>{{teacher.phone}}</td>
+            <td>{{teacher.mail}}</td>
+            <td>{{teacher.birthday}}</td>
+        </tr>
+    </table>
+</div>
+</div>
