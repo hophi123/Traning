@@ -10,3 +10,15 @@ table {
     margin-left: 10px;
     background-color: white;
 }
+tr:nth-child(odd){
+    background: #E8E8E8;
+  }
+tr {
+    height: 30px;
+}
+.first-tr {
+    background-color: white !important;
+}
+th {
+    font-weight: bold;
+}

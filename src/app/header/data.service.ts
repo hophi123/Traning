@@ -111,7 +111,7 @@ export class DataService {
     },
   ];
 
-  khoa = [
+  khoas = [
     {
       id: 1,
       name: 'Công Nghệ Thông Tin'

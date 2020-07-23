@@ -18,5 +18,5 @@
     display: block;
 }
 .menu-bar ul li a:focus {
-    border-bottom: red 1.5px solid;
+    border-bottom: red 3px solid;
 }
