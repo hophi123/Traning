@@ -1,0 +1,25 @@
+.main {
+    background-color: #E8E8E8;
+    height: 100%;
+}
+
+.student-body table,
+th,
+td {
+    border: 1px solid;
+}
+
+.student-body table {
+    border-collapse: collapse;
+    width: 95%;
+    margin-left: 10px;
+    background-color: white;
+}
+
+.dropdown ul {
+    display: none
+}
+
+.dropdown:hover ul {
+    display: block;
+}

@@ -1,1 +1,24 @@
-<p>student-body works!</p>
+<div class="main">
+    <div class="student-body">
+        <table>
+            <tr class="first-tr">
+                <th>Tên</th>
+                <th>Khoa</th>
+                <th>Lớp</th>
+                <th>Ngày sinh</th>
+            </tr>
+            <ng-container *ngFor="let khoa of khoas">
+                <tr>
+                    <td colspan="4" class="dropdowm">
+                        <a>{{khoa.name}}</a>
+                        <ul>
+                            <li>link 1</li>
+                            <li>link 2</li>
+                            <li>link 3</li>
+                        </ul>
+                    </td>
+                </tr>
+            </ng-container>
+        </table>
+    </div>
+</div>

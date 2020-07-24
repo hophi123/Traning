@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../header/data.service'
 
 @Component({
   selector: 'app-student-body',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentBodyComponent implements OnInit {
 
-  constructor() { }
+  khoas: any;
+  lops: any;
+  constructor(private data: DataService) { 
+    this.khoas = this.data.khoas;
+    this.lops = this.data.lops;
+  }
 
   ngOnInit(): void {
   }
