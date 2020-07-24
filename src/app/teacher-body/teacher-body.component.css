@@ -1,24 +1,96 @@
-.main {
-    background-color: #E8E8E8;
-}
-table, th, td {
-    border: 1px solid;
-}
-table {
-    border-collapse: collapse;
-    width: 95%;
-    margin-left: 10px;
-    background-color: white;
-}
-tr:nth-child(odd){
-    background: #E8E8E8;
-  }
-tr {
-    height: 30px;
-}
-.first-tr {
-    background-color: white !important;
-}
-th {
-    font-weight: bold;
-}
+    .main {
+        background-color: #E8E8E8;
+        height: 100%;
+    }
+    
+    .teacher-body table,
+    th,
+    td {
+        border: 1px solid;
+    }
+    
+    .teacher-body table {
+        border-collapse: collapse;
+        width: 95%;
+        margin-left: 10px;
+        background-color: white;
+    }
+    
+    .teacher-body table tr:nth-child(odd) {
+        background: #E8E8E8;
+    }
+    
+    .teacher-body table tr {
+        height: 30px;
+    }
+    
+    .first-tr {
+        background-color: white !important;
+    }
+    
+    th {
+        font-weight: bold;
+    }
+    
+    .form {
+        height: 100px;
+    }
+    
+    .form button {
+        background-color: white;
+        height: 30px;
+        border: none;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+    
+    .form form {
+        text-align: center;
+    }
+    
+    .form form input {
+        margin-right: 5px;
+        height: 25px;
+        border: none;
+    }
+    
+    .container-show {
+        background-color: #E8E8E8;
+        width: 69.8%;
+        float: left;
+        border-right: 2px solid red;
+    }
+    
+    .container {
+        background-color: #E8E8E8;
+    }
+    
+    .popup-add {
+        float: right;
+        width: 30%;
+        background-color: #E8E8E8;
+        height: 521px;
+    }
+    
+    .popup-add button {
+        display: inline-block;
+        text-align: center;
+        margin-left: 92%;
+    }
+    
+    .popup-add form {
+        text-align: center;
+    }
+    
+    .popup-add form label {
+        float: left;
+        margin-left: 30px;
+    }
+    
+    .popup-add form input {
+        text-align: center;
+    }
+    
+    .input {
+        margin-bottom: 20px;
+    }

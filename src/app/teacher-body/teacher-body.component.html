@@ -1,35 +1,81 @@
 <div class="main">
-<div class="teacher-body">
-    <table>
-        <tr class="first-tr">
-            <th>#</th>
-            <th>Tên</th>
-            <th>Khoa</th>
-            <th>Phone</th>
-            <th>Mail</th>
-            <th>Ngày sinh</th>
-        </tr>
-        <ng-container *ngFor="let teacher of teachers; let i = index">
-            <tr *ngFor="let data of teacher.data; let j = index; let l = count;">
-                <ng-container [ngSwitch]="j">
-                    <ng-container *ngSwitchCase="0">
-                        <td>{{data.id}}</td>
-                        <td>{{data.name}}</td>
-                        <td [rowSpan]="l">{{khoas[data.khoa-1].name}}</td>
-                        <td>{{data.phone}}</td>
-                        <td>{{data.mail}}</td>  
-                        <td>{{data.birthday}}</td>
-                    </ng-container>
-                    <ng-container *ngSwitchDefault>
-                        <td>{{data.id}}</td>
-                        <td>{{data.name}}</td>
-                        <td>{{data.phone}}</td>
-                        <td>{{data.mail}}</td>  
-                        <td>{{data.birthday}}</td>
-                    </ng-container>
+    <div [class]="show()">
+        <div class="form">
+            <button (click)="clickButtonAdd()">Add new</button>
+            <form>
+                <label>Tên:</label><input type="text" name="ten">
+                <label>Phone:</label><input type="text" name="phone">
+                <label>Ngày sinh:</label><input type="date" name="ngaysinh">
+                <button>Search</button>
+            </form>
+        </div>
+        <div class="teacher-body">
+            <table>
+                <tr class="first-tr">
+                    <th>#</th>
+                    <th>Tên</th>
+                    <th>Khoa</th>
+                    <th>Phone</th>
+                    <th>Mail</th>
+                    <th>Ngày sinh</th>
+                </tr>
+                <ng-container *ngFor="let teacher of teachers; let i = index">
+                    <tr *ngFor="let data of teacher.data; let j = index; let l = count;">
+                        <ng-container [ngSwitch]="j">
+                            <ng-container *ngSwitchCase="0">
+                                <td>{{data.id}}</td>
+                                <td>{{data.name}}</td>
+                                <td [rowSpan]="l">{{khoas[data.khoa-1].name}}</td>
+                                <td>{{data.phone}}</td>
+                                <td>{{data.mail}}</td>
+                                <td>{{data.birthday}}</td>
+                            </ng-container>
+                            <ng-container *ngSwitchDefault>
+                                <td>{{data.id}}</td>
+                                <td>{{data.name}}</td>
+                                <td>{{data.phone}}</td>
+                                <td>{{data.mail}}</td>
+                                <td>{{data.birthday}}</td>
+                            </ng-container>
+                        </ng-container>
+                    </tr>
                 </ng-container>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="isShow" class="popup-add">
+        <button>X</button>
+        <form>
+            <div class="input">
+                <label>Tên:</label><input type="text" name="ten"><br>
+            </div>
+            <div class="input">
+                <label>Phone:</label><input type="text" name="phone"><br>
+            </div>
+            <div class="input">
+                <label>Ngày sinh:</label><input type="date" name="ngaysinh"><br>
+            </div>
+            <div class="input">
+                <label>Khoa:</label><input type="text" name="khoa"><br>
+            </div>
+        </form>
+        <!-- <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td>Tên:</td>
+                <td><input type='text' /></td>
             </tr>
-        </ng-container>
-    </table>
-</div>
+            <tr>
+                <td>Phone:</td>
+                <td><input type='text' /></td>
+            </tr>
+            <tr>
+                <td>Ngày sinh:</td>
+                <td><input type='date' /></td>
+            </tr>
+            <tr>
+                <td>Khoa:</td>
+                <td><input type='text' /></td>
+            </tr>
+        </table> -->
+    </div>
 </div>
