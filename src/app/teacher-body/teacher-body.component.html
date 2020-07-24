@@ -24,7 +24,7 @@
                         <ng-container [ngSwitch]="j">
                             <ng-container *ngSwitchCase="0">
                                 <td>{{data.id}}</td>
-                                <td>{{data.name}}</td>
+                                <td [ngStyle]="{'background-color': isShowEdit == true ? '#ACF5E1' : ''}" (click)="clickButtonEdit(); getTeacherInfo(data.id)">{{data.name}}</td>
                                 <td [rowSpan]="l">{{khoas[data.khoa-1].name}}</td>
                                 <td>{{data.phone}}</td>
                                 <td>{{data.mail}}</td>
@@ -32,7 +32,7 @@
                             </ng-container>
                             <ng-container *ngSwitchDefault>
                                 <td>{{data.id}}</td>
-                                <td>{{data.name}}</td>
+                                <td [ngStyle]="{'background-color': isShowEdit == true ? '#ACF5E1' : ''}" (click)="clickButtonEdit(); getTeacherInfo(data.id)">{{data.name}}</td>
                                 <td>{{data.phone}}</td>
                                 <td>{{data.mail}}</td>
                                 <td>{{data.birthday}}</td>
@@ -44,38 +44,39 @@
         </div>
     </div>
     <div *ngIf="isShow" class="popup-add">
-        <button>X</button>
+        <button class="button-x" (click)="isShow=false">X</button>
         <form>
-            <div class="input">
+            <p>
                 <label>Tên:</label><input type="text" name="ten"><br>
-            </div>
-            <div class="input">
+            </p>
+            <p>
                 <label>Phone:</label><input type="text" name="phone"><br>
-            </div>
-            <div class="input">
+            </p>
+            <p>
                 <label>Ngày sinh:</label><input type="date" name="ngaysinh"><br>
-            </div>
-            <div class="input">
+            </p>
+            <p>
                 <label>Khoa:</label><input type="text" name="khoa"><br>
-            </div>
+            </p>
         </form>
-        <!-- <table cellspacing="0" cellpadding="0">
-            <tr>
-                <td>Tên:</td>
-                <td><input type='text' /></td>
-            </tr>
-            <tr>
-                <td>Phone:</td>
-                <td><input type='text' /></td>
-            </tr>
-            <tr>
-                <td>Ngày sinh:</td>
-                <td><input type='date' /></td>
-            </tr>
-            <tr>
-                <td>Khoa:</td>
-                <td><input type='text' /></td>
-            </tr>
-        </table> -->
+        <button class="button-save">Save</button>
+    </div>
+    <div *ngIf="isShowEdit" class="popup-edit">
+        <button class="button-x" (click)="isShowEdit=false">X</button>
+        <form>
+            <p>
+                <label>Tên:</label><input type="text" name="ten" value={{teacherInfo.name}}><br>
+            </p>
+            <p>
+                <label>Phone:</label><input type="text" value={{teacherInfo.phone}}><br>
+            </p>
+            <p>
+                <label>Ngày sinh:</label><input type="date" value={{teacherInfo.birthday}}><br>
+            </p>
+            <p>
+                <label>Khoa:</label><input type="text" value={{khoas[teacherInfo.khoa-1].name}}><br>
+            </p>
+        </form>
+        <button class="button-save">Save</button>
     </div>
 </div>
