@@ -11,74 +11,62 @@
                 </tr>
                 <ng-container *ngFor="let khoa of khoas ">
                     <tr>
-                        <td colspan="4 " class="dropdowm ">
-                            <mat-expansion-panel>
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title (click)="getClass(khoa.id) ">
-                                        {{khoa.name}}
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <ng-container *ngFor="let lop of lopArrays ">
-                                    <ng-container *ngIf="khoa.id==lop.khoa ">
-                                        <mat-expansion-panel>
-                                            <mat-expansion-panel-header>
-                                                <mat-panel-title>
-                                                    {{lop.name}}
-                                                </mat-panel-title>
-                                            </mat-expansion-panel-header>
-                                            <ng-container *ngFor="let sinhvien of sinhviens ">
-                                                <ng-container *ngFor="let data of sinhvien.data ">
-                                                    <ng-container *ngIf="data.lop==lop.id ">
-                                                        <div (click)="clickButtonEdit(); getStudentInfo(data.id)">
-                                                            <span>
-                                                                {{data.name}}
-                                                            </span>
-                                                            <span>
-                                                                {{khoa.name}}
-                                                            </span>
-                                                            <span>
-                                                                {{lop.name}}
-                                                            </span>
-                                                            <span>
-                                                                {{data.birthday}}
-                                                            </span>
-                                                        </div>
-                                                    </ng-container>
-                                                </ng-container>
-                                            </ng-container>
-                                        </mat-expansion-panel>
-                                    </ng-container>
-                                </ng-container>
-                            </mat-expansion-panel>
+                        <td colspan="4 " class="dropdowm " (click)="getClass(khoa.id)">
+                            {{khoa.name}}
                         </td>
                     </tr>
+                    <ng-container *ngIf="khoa.id==idKhoa && isShowLop ">
+                        <ng-container *ngFor=" let lop of lopArrays ">
+                            <tr>
+                                <td class="second-tr" colspan="4 " (click)="ShowStudent(lop.id)">
+                                    {{lop.name}}
+                                </td>
+                            </tr>
+                            <ng-container *ngFor="let sinhvien of sinhviens ">
+                                <tr *ngIf="sinhvien.lop == lop.id && idLop == lop.id && sinhvien.khoa == khoa.id && isShowStudent" (click)="clickButtonEdit(); getStudentInfo(sinhvien.id)">
+                                    <td>
+                                        {{sinhvien.name}}
+                                    </td>
+                                    <td>
+                                        {{khoa.name}}
+                                    </td>
+                                    <td>
+                                        {{lops[sinhvien.lop-1].name}}
+                                    </td>
+                                    <td>
+                                        {{sinhvien.birthday}}
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
                 </ng-container>
             </table>
         </div>
     </div>
-    <div *ngIf="isShow" class="popup-edit">
-        <button class="button-x" (click)="isShow=false">X</button>
+    <div *ngIf="isShow " class="popup-edit ">
+        <button class="button-x " (click)="isShow=false ">X</button>
         <form>
             <p>
-                <label>Tên:</label><input type="text" name="ten" value={{studentInfo.name}}><br>
+                <label>Tên:</label><input type="text " name="ten " value={{studentInfo.name}}><br>
             </p>
             <p>
                 <label>Khoa:</label>
                 <select>
-                    <ng-container *ngFor="let khoa of khoas">
-                        <option *ngIf="studentInfo.khoa == khoa.id" selected>{{khoa.name}}</option>
-                        <option *ngIf="studentInfo.khoa != khoa.id">{{khoa.name}}</option>
+                    <ng-container *ngFor="let khoa of khoas ">
+                        <option *ngIf="studentInfo.khoa==khoa.id " selected>{{khoa.name}}</option>
+                        <option *ngIf="studentInfo.khoa !=khoa.id ">{{khoa.name}}</option>
                     </ng-container>
                 </select>
             </p>
             <p>
-                <label>Lớp:</label><input type="text" value={{lops[studentInfo.lop-1].name}}><br>
+                <label>Lớp:</label><input type="text " value={{lops[studentInfo.lop-1].name}}><br>
             </p>
             <p>
-                <label>Ngày sinh:</label><input type="date" value={{studentInfo.birthday}}><br>
+                <label>Ngày sinh:</label><input type="date " value={{studentInfo.birthday}}><br>
             </p>
 
         </form>
-        <button class="button-save">Save</button>
+        <button class="button-save ">Save</button>
     </div>
 </div>

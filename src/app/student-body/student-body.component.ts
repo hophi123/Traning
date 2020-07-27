@@ -13,21 +13,28 @@ export class StudentBodyComponent implements OnInit {
   lopOject: any;
   sinhviens: any;
   lopArrays: any;
+  idLop: any;
+  idKhoa: any;
   isShow = false;
+  isShowLop = false;
+  isShowStudent = false;
   edit: String;
   studentInfo: any;
   constructor(private data: DataService) {
     this.khoas = this.data.khoas;
     this.lops = this.data.lops;
-    this.sinhviens = Object.keys(this.groups).map(k => { return this.groups[k]; });
+    //this.sinhviens = Object.keys(this.groups).map(k => { return this.groups[k]; });
+    this.sinhviens = this.data.sinhviens;
     console.log(this.sinhviens);
-    
   }
 
   ngOnInit(): void {
   }
 
   getClass(id: number) {
+    this.isShowLop = !this.isShowLop;
+    console.log(this.isShowLop);
+    this.idKhoa = id;
         this.lopArrays = [];
         for (let lop of this.lops) {  
           if (lop.khoa == id) {
@@ -64,5 +71,12 @@ export class StudentBodyComponent implements OnInit {
 
       getStudentInfo(id: number){
         this.studentInfo = this.data.sinhviens[id-1];
+      }
+
+      ShowStudent(id: number){
+        this.isShowStudent = !this.isShowStudent;
+        console.log(this.isShowStudent);
+        
+        this.idLop = id;
       }
 }
