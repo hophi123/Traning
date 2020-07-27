@@ -26,6 +26,7 @@ export class TeacherBodyComponent implements OnInit {
   isShow = false;
   isShowEdit = false;
   add: String;
+  idStyle: any;
   constructor(private data: DataService
   ) {
     this.khoas = this.data.khoas;
@@ -40,11 +41,13 @@ export class TeacherBodyComponent implements OnInit {
     console.log('Edit :' +this.isShowEdit);
   }
 
-  clickButtonEdit() {
+  clickButtonEdit(id: number) {
+    this.idStyle = id;
     this.isShowEdit = true;
     this.isShow = false;
     console.log('Edit :' +this.isShowEdit); 
     console.log('Add :' +this.isShow);
+    this.teacherInfo = this.data.giangViens[id-1];
   }
 
   show(): String {
@@ -54,10 +57,4 @@ export class TeacherBodyComponent implements OnInit {
       return this.add = 'container';
     }
   }
-
-  getTeacherInfo(id: number){
-    this.teacherInfo = this.data.giangViens[id-1];
-    console.log(this.teacherInfo);
-  }
-
 }

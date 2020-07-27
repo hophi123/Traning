@@ -24,7 +24,7 @@
                         <ng-container [ngSwitch]="j">
                             <ng-container *ngSwitchCase="0">
                                 <td>{{data.id}}</td>
-                                <td [ngStyle]="{'background-color': isShowEdit == true ? '#ACF5E1' : ''}" (click)="clickButtonEdit(); getTeacherInfo(data.id)">{{data.name}}</td>
+                                <td [ngStyle]="{'background-color': isShowEdit == true && data.id == idStyle ? '#ACF5E1' : ''}" (click)="clickButtonEdit(data.id);">{{data.name}}</td>
                                 <td [rowSpan]="l">{{khoas[data.khoa-1].name}}</td>
                                 <td>{{data.phone}}</td>
                                 <td>{{data.mail}}</td>
@@ -32,7 +32,7 @@
                             </ng-container>
                             <ng-container *ngSwitchDefault>
                                 <td>{{data.id}}</td>
-                                <td [ngStyle]="{'background-color': isShowEdit == true ? '#ACF5E1' : ''}" (click)="clickButtonEdit(); getTeacherInfo(data.id)">{{data.name}}</td>
+                                <td [ngStyle]="{'background-color': isShowEdit == true && data.id == idStyle ? '#ACF5E1' : ''}" (click)="clickButtonEdit(data.id); getTeacherInfo(data.id)">{{data.name}}</td>
                                 <td>{{data.phone}}</td>
                                 <td>{{data.mail}}</td>
                                 <td>{{data.birthday}}</td>
@@ -56,7 +56,11 @@
                 <label>Ngày sinh:</label><input type="date" name="ngaysinh"><br>
             </p>
             <p>
-                <label>Khoa:</label><input type="text" name="khoa"><br>
+                <label>Khoa:</label>
+                <select>
+                    <option></option>
+                    <option *ngFor="let khoa of khoas" >{{khoa.name}}</option>
+                </select>
             </p>
         </form>
         <button class="button-save">Save</button>
@@ -74,7 +78,13 @@
                 <label>Ngày sinh:</label><input type="date" value={{teacherInfo.birthday}}><br>
             </p>
             <p>
-                <label>Khoa:</label><input type="text" value={{khoas[teacherInfo.khoa-1].name}}><br>
+                <label>Khoa:</label>
+                <select>
+                    <ng-container *ngFor="let khoa of khoas">
+                        <option *ngIf="teacherInfo.khoa == khoa.id" selected>{{khoa.name}}</option>
+                        <option *ngIf="teacherInfo.khoa != khoa.id">{{khoa.name}}</option>
+                    </ng-container>
+                </select>
             </p>
         </form>
         <button class="button-save">Save</button>

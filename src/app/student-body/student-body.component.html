@@ -31,17 +31,17 @@
                                                     <ng-container *ngIf="data.lop==lop.id ">
                                                         <div (click)="clickButtonEdit(); getStudentInfo(data.id)">
                                                             <span>
-                                                        {{data.name}}
-                                                    </span>
+                                                                {{data.name}}
+                                                            </span>
                                                             <span>
-                                                        {{khoa.name}}
-                                                    </span>
+                                                                {{khoa.name}}
+                                                            </span>
                                                             <span>
-                                                        {{lop.name}}
-                                                    </span>
+                                                                {{lop.name}}
+                                                            </span>
                                                             <span>
-                                                        {{data.birthday}}
-                                                    </span>
+                                                                {{data.birthday}}
+                                                            </span>
                                                         </div>
                                                     </ng-container>
                                                 </ng-container>
@@ -63,7 +63,13 @@
                 <label>Tên:</label><input type="text" name="ten" value={{studentInfo.name}}><br>
             </p>
             <p>
-                <label>Khoa:</label><input type="text" value={{khoas[studentInfo.khoa-1].name}}><br>
+                <label>Khoa:</label>
+                <select>
+                    <ng-container *ngFor="let khoa of khoas">
+                        <option *ngIf="studentInfo.khoa == khoa.id" selected>{{khoa.name}}</option>
+                        <option *ngIf="studentInfo.khoa != khoa.id">{{khoa.name}}</option>
+                    </ng-container>
+                </select>
             </p>
             <p>
                 <label>Lớp:</label><input type="text" value={{lops[studentInfo.lop-1].name}}><br>

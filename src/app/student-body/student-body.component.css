@@ -25,6 +25,14 @@ td {
     margin-top: 10px;
 }
 
+.student-body table tr:nth-child(odd) {
+    background-color: #E8E8E8;
+}
+
+.first-tr {
+    background-color: white !important;
+}
+
 .dropdown ul {
     display: none
 }
@@ -88,4 +96,11 @@ td {
 
 .popup-edit form label {
     display: table-cell;
+}
+
+.popup-edit form select {
+    display: table-cell;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    height: 22px;
 }

@@ -127,10 +127,24 @@
         margin-left: 10px;
     }
     
+    .popup-add form select {
+        display: table-cell;
+        margin-bottom: 15px;
+        margin-left: 10px;
+        height: 22px;
+    }
+    
     .popup-edit form input {
         display: table-cell;
         margin-bottom: 15px;
         margin-left: 10px;
+    }
+    
+    .popup-edit form select {
+        display: table-cell;
+        margin-bottom: 15px;
+        margin-left: 10px;
+        height: 22px;
     }
     
     .popup-add form label {

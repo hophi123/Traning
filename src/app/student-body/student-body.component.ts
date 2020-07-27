@@ -20,6 +20,8 @@ export class StudentBodyComponent implements OnInit {
     this.khoas = this.data.khoas;
     this.lops = this.data.lops;
     this.sinhviens = Object.keys(this.groups).map(k => { return this.groups[k]; });
+    console.log(this.sinhviens);
+    
   }
 
   ngOnInit(): void {
@@ -27,16 +29,14 @@ export class StudentBodyComponent implements OnInit {
 
   getClass(id: number) {
         this.lopArrays = [];
-        for (let lop of this.lops) {
+        for (let lop of this.lops) {  
           if (lop.khoa == id) {
-            if (!this.lopArrays.includes(lop.name)) {
               this.lopOject = {
                 name: lop.name,
                 id: lop.id,
                 khoa: lop.khoa
               }
               this.lopArrays.push(this.lopOject);
-            }
           }
         }
         console.log(this.lopArrays);
