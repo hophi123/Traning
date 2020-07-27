@@ -9,11 +9,20 @@ td {
     border: 1px solid;
 }
 
+.student-body button {
+    background-color: white;
+    height: 30px;
+    border: none;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
 .student-body table {
     border-collapse: collapse;
     width: 95%;
     margin-left: 10px;
     background-color: white;
+    margin-top: 10px;
 }
 
 .dropdown ul {
@@ -22,4 +31,61 @@ td {
 
 .dropdown:hover ul {
     display: block;
+}
+
+.container-show {
+    background-color: #E8E8E8;
+    width: 69.8%;
+    float: left;
+    border-right: 2px solid #8797B8;
+}
+
+.container {
+    background-color: #E8E8E8;
+}
+
+.popup-edit {
+    float: right;
+    width: 30%;
+    background-color: #E8E8E8;
+    height: 521px;
+}
+
+.button-x {
+    display: inline-block;
+    text-align: center;
+    margin-left: 92%;
+    margin-top: 10px;
+    background-color: white;
+    border: none;
+}
+
+.button-save {
+    display: inline-block;
+    text-align: center;
+    margin-left: 86%;
+    margin-top: 10px;
+    height: 23px;
+    background-color: white;
+    border: none;
+}
+
+.popup-edit form {
+    display: table;
+    margin-left: 40px;
+    margin-top: 22px;
+}
+
+.popup-edit form p {
+    display: table-row;
+}
+
+.popup-edit form input {
+    display: table-cell;
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+.popup-edit form label {
+    display: table-cell;
 }

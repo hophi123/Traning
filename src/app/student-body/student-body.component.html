@@ -1,24 +1,78 @@
 <div class="main">
-    <div class="student-body">
-        <table>
-            <tr class="first-tr">
-                <th>Tên</th>
-                <th>Khoa</th>
-                <th>Lớp</th>
-                <th>Ngày sinh</th>
-            </tr>
-            <ng-container *ngFor="let khoa of khoas">
-                <tr>
-                    <td colspan="4" class="dropdowm">
-                        <a>{{khoa.name}}</a>
-                        <ul>
-                            <li>link 1</li>
-                            <li>link 2</li>
-                            <li>link 3</li>
-                        </ul>
-                    </td>
+    <div [class]="show()">
+        <div class="student-body">
+            <button>Add new</button>
+            <table>
+                <tr class="first-tr ">
+                    <th>Tên</th>
+                    <th>Khoa</th>
+                    <th>Lớp</th>
+                    <th>Ngày sinh</th>
                 </tr>
-            </ng-container>
-        </table>
+                <ng-container *ngFor="let khoa of khoas ">
+                    <tr>
+                        <td colspan="4 " class="dropdowm ">
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title (click)="getClass(khoa.id) ">
+                                        {{khoa.name}}
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <ng-container *ngFor="let lop of lopArrays ">
+                                    <ng-container *ngIf="khoa.id==lop.khoa ">
+                                        <mat-expansion-panel>
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title>
+                                                    {{lop.name}}
+                                                </mat-panel-title>
+                                            </mat-expansion-panel-header>
+                                            <ng-container *ngFor="let sinhvien of sinhviens ">
+                                                <ng-container *ngFor="let data of sinhvien.data ">
+                                                    <ng-container *ngIf="data.lop==lop.id ">
+                                                        <div (click)="clickButtonEdit(); getStudentInfo(data.id)">
+                                                            <span>
+                                                        {{data.name}}
+                                                    </span>
+                                                            <span>
+                                                        {{khoa.name}}
+                                                    </span>
+                                                            <span>
+                                                        {{lop.name}}
+                                                    </span>
+                                                            <span>
+                                                        {{data.birthday}}
+                                                    </span>
+                                                        </div>
+                                                    </ng-container>
+                                                </ng-container>
+                                            </ng-container>
+                                        </mat-expansion-panel>
+                                    </ng-container>
+                                </ng-container>
+                            </mat-expansion-panel>
+                        </td>
+                    </tr>
+                </ng-container>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="isShow" class="popup-edit">
+        <button class="button-x" (click)="isShow=false">X</button>
+        <form>
+            <p>
+                <label>Tên:</label><input type="text" name="ten" value={{studentInfo.name}}><br>
+            </p>
+            <p>
+                <label>Khoa:</label><input type="text" value={{khoas[studentInfo.khoa-1].name}}><br>
+            </p>
+            <p>
+                <label>Lớp:</label><input type="text" value={{lops[studentInfo.lop-1].name}}><br>
+            </p>
+            <p>
+                <label>Ngày sinh:</label><input type="date" value={{studentInfo.birthday}}><br>
+            </p>
+
+        </form>
+        <button class="button-save">Save</button>
     </div>
 </div>

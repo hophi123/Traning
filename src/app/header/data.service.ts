@@ -129,23 +129,28 @@ export class DataService {
   lops = [
     {
       id: 1,
-      name: '18T1'
+      name: '18T1',
+      khoa: 1
     },
     {
       id: 2,
-      name: '18T2'
+      name: '18T2',
+      khoa: 1
     },
     {
       id: 3,
-      name: '18T3'
+      name: '18T3',
+      khoa: 1
     },
     {
       id: 4,
-      name: '18C1A'
+      name: '18C1A',
+      khoa: 2
     },
     {
       id: 5,
-      name: '13D1'
+      name: '13D1',
+      khoa: 3
     },
   ];
 
@@ -183,21 +188,21 @@ export class DataService {
       name: 'Nguyễn Văn E',
       birthday: '2000-01-01',
       khoa: 3,
-      lop: 4
+      lop: 5
     },
     {
       id: 6,
       name: 'Nguyễn Văn F',
       birthday: '2000-01-01',
-      khoa: 4,
-      lop: 4
+      khoa: 3,
+      lop: 5
     },
     {
       id: 7,
-      name: 'Nguyễn Văn F',
+      name: 'Nguyễn Văn G',
       birthday: '2000-01-01',
       khoa: 2,
-      lop: 5
+      lop: 4
     },
   ];
   constructor() { }
