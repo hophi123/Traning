@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppComponent } from './app.component';
@@ -9,6 +10,7 @@ import { TeacherBodyComponent } from './teacher-body/teacher-body.component';
 import { AppRoutingModule } from './app-routing.module';
 import { StudentBodyComponent } from './student-body/student-body.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PhonePipe } from './custom-pipes/phone.pipe';
 
 @NgModule({
   declarations: [
@@ -16,13 +18,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     MenuComponent,
     TeacherBodyComponent,
-    StudentBodyComponent
+    StudentBodyComponent,
+    PhonePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 <div class="main">
     <div [class]="show()">
         <div class="student-body">
-            <button>Add new</button>
+            <button (click)="clickButton(1,0)">Add new</button>
             <table>
                 <tr class="first-tr ">
                     <th>Tên</th>
@@ -10,33 +10,35 @@
                     <th>Ngày sinh</th>
                 </tr>
                 <ng-container *ngFor="let khoa of khoas ">
-                    <tr>
-                        <td colspan="4 " class="dropdowm " (click)="getClass(khoa.id)">
-                            {{khoa.name}}
+                    <tr (click)="getClass(khoa.id)">
+                        <td colspan="4 " class="dropdowm ">
+                            {{khoa.name}}<span *ngIf="isShowLop[khoa.id]">▲</span><span *ngIf="!isShowLop[khoa.id]">▼</span>
                         </td>
                     </tr>
-                    <ng-container *ngIf="khoa.id==idKhoa && isShowLop ">
-                        <ng-container *ngFor=" let lop of lopArrays ">
-                            <tr>
-                                <td class="second-tr" colspan="4 " (click)="ShowStudent(lop.id)">
-                                    {{lop.name}}
+                    <ng-container *ngIf="isShowLop[khoa.id] ">
+                        <ng-container *ngFor=" let lop of lopById[khoa.id] ">
+                            <tr (click)="getStudent(lop.id)">
+                                <td class="second-tr" colspan="4 ">
+                                    {{lop.name}}<span *ngIf="isShowStudent[lop.id]">▲</span><span *ngIf="!isShowStudent[lop.id]">▼</span>
                                 </td>
                             </tr>
-                            <ng-container *ngFor="let sinhvien of sinhviens ">
-                                <tr *ngIf="sinhvien.lop == lop.id && idLop == lop.id && sinhvien.khoa == khoa.id && isShowStudent" (click)="clickButtonEdit(); getStudentInfo(sinhvien.id)">
-                                    <td>
-                                        {{sinhvien.name}}
-                                    </td>
-                                    <td>
-                                        {{khoa.name}}
-                                    </td>
-                                    <td>
-                                        {{lops[sinhvien.lop-1].name}}
-                                    </td>
-                                    <td>
-                                        {{sinhvien.birthday}}
-                                    </td>
-                                </tr>
+                            <ng-container *ngIf="isShowStudent[lop.id]">
+                                <ng-container *ngFor="let sinhvien of sinhvienById[lop.id] ">
+                                    <tr [ngStyle]="{'background-color': isShow == true && sinhvien.id == idStyle ? '#ACF5E1' : ''}" (click)="clickButton(2,sinhvien.id)">
+                                        <td>
+                                            {{sinhvien.name}}
+                                        </td>
+                                        <td>
+                                            {{khoa.name}}
+                                        </td>
+                                        <td>
+                                            {{lops[sinhvien.lop-1].name}}
+                                        </td>
+                                        <td>
+                                            {{sinhvien.birthday | date:"yyyy/MM/dd"}}
+                                        </td>
+                                    </tr>
+                                </ng-container>
                             </ng-container>
                         </ng-container>
                     </ng-container>
@@ -63,7 +65,7 @@
                 <label>Lớp:</label><input type="text " value={{lops[studentInfo.lop-1].name}}><br>
             </p>
             <p>
-                <label>Ngày sinh:</label><input type="date " value={{studentInfo.birthday}}><br>
+                <label>Ngày sinh:</label><input type="date" value={{studentInfo.birthday}}><br>
             </p>
 
         </form>

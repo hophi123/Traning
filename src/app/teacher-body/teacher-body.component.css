@@ -1,6 +1,5 @@
     .main {
         background-color: #E8E8E8;
-        height: 100%;
     }
     
     .teacher-body table,
@@ -19,9 +18,6 @@
     .teacher-body table tr:nth-child(odd) {
         background: #E8E8E8;
     }
-    /* .active {
-        background-color: #ACF5E1;
-    } */
     
     .teacher-body table tr {
         height: 30px;
@@ -68,14 +64,7 @@
         background-color: #E8E8E8;
     }
     
-    .popup-add {
-        float: right;
-        width: 30%;
-        background-color: #E8E8E8;
-        height: 521px;
-    }
-    
-    .popup-edit {
+    .popup {
         float: right;
         width: 30%;
         background-color: #E8E8E8;
@@ -101,56 +90,31 @@
         border: none;
     }
     
-    .popup-add form {
+    .popup form {
         display: table;
         margin-left: 40px;
         margin-top: 22px;
     }
     
-    .popup-edit form {
-        display: table;
-        margin-left: 40px;
-        margin-top: 22px;
-    }
-    
-    .popup-add form p {
+    .popup form p {
         display: table-row;
     }
     
-    .popup-edit form p {
-        display: table-row;
-    }
-    
-    .popup-add form input {
+    .popup form input {
         display: table-cell;
         margin-bottom: 15px;
         margin-left: 10px;
+        width: 180px;
     }
     
-    .popup-add form select {
+    .popup form select {
         display: table-cell;
         margin-bottom: 15px;
         margin-left: 10px;
         height: 22px;
+        width: 180px;
     }
     
-    .popup-edit form input {
-        display: table-cell;
-        margin-bottom: 15px;
-        margin-left: 10px;
-    }
-    
-    .popup-edit form select {
-        display: table-cell;
-        margin-bottom: 15px;
-        margin-left: 10px;
-        height: 22px;
-    }
-    
-    .popup-add form label {
-        display: table-cell;
-    }
-    
-    .popup-edit form label {
+    .popup form label {
         display: table-cell;
     }

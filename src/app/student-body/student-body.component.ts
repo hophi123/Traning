@@ -13,70 +13,96 @@ export class StudentBodyComponent implements OnInit {
   lopOject: any;
   sinhviens: any;
   lopArrays: any;
+  sinhvienArrays: any;
+  lopById = [];
+  sinhvienById = [];
   idLop: any;
   idKhoa: any;
   isShow = false;
-  isShowLop = false;
-  isShowStudent = false;
-  edit: String;
+  isShowEdit = false;
+  isShowLop = [];
+  isShowStudent = [];
   studentInfo: any;
+  idStyle: any;
   constructor(private data: DataService) {
     this.khoas = this.data.khoas;
     this.lops = this.data.lops;
-    //this.sinhviens = Object.keys(this.groups).map(k => { return this.groups[k]; });
     this.sinhviens = this.data.sinhviens;
-    console.log(this.sinhviens);
   }
 
   ngOnInit(): void {
   }
 
+  groups: any = this.data.sinhviens.reduce(function (r, o) {
+    let groupKey = 0;
+    var m = o.lop;
+    (r[m]) ? r[m].data.push(o) : r[m] = { group: Number(groupKey++), data: [o] };
+    return r;
+  }, {});
+
+  clickButton(key: number, id: number) {
+    this.isShow = true;
+    this.idStyle = id;
+    if(key==1){
+      this.studentInfo = {
+        id: "",
+        name: "",
+        birthday: "",
+        khoa: "",
+        lop: ""
+      }
+      this.isShowEdit = false;
+    }
+
+    if(key == 2){
+      this.studentInfo = this.sinhviens[id-1];
+      this.isShowEdit = true;
+    }
+  }
+
+  show(): String {
+    if (this.isShow) {
+      return 'container-show';
+    } else {
+      return 'container';
+    }
+  }
+
+  getStudentInfo(id: number) {
+    this.studentInfo = this.data.sinhviens[id - 1];
+  }
+
   getClass(id: number) {
-    this.isShowLop = !this.isShowLop;
-    console.log(this.isShowLop);
+
     this.idKhoa = id;
-        this.lopArrays = [];
-        for (let lop of this.lops) {  
-          if (lop.khoa == id) {
-              this.lopOject = {
-                name: lop.name,
-                id: lop.id,
-                khoa: lop.khoa
-              }
-              this.lopArrays.push(this.lopOject);
-          }
+    this.lopArrays = [];
+    for (let lop of this.lops) {
+      if (lop.khoa == id) {
+        this.lopOject = {
+          name: lop.name,
+          id: lop.id,
+          khoa: lop.khoa
         }
-        console.log(this.lopArrays);
-        
+        this.isShowLop[id] = !this.isShowLop[id];
+        this.lopArrays.push(this.lopOject);
       }
+    }
+    this.lopById[id] = this.lopArrays;
+  }
 
-      groups: any = this.data.sinhviens.reduce(function (r, o) {
-        let groupKey = 0;
-        var m = o.lop;
-        (r[m]) ? r[m].data.push(o) : r[m] = { group: Number(groupKey++), data: [o] };
-        return r;
-      }, {});
-
-      clickButtonEdit() {
-        this.isShow = true;
+  getStudent(idLop: number) {
+    this.sinhvienArrays = [];
+    for(let sv of this.sinhviens){
+      if(idLop == sv.lop){
+        this.sinhvienArrays.push(sv);
       }
-
-      show(): String {
-        if(this.isShow){
-          return this.edit = 'container-show';
-        }else{
-          return this.edit = 'container';
-        }
-      }
-
-      getStudentInfo(id: number){
-        this.studentInfo = this.data.sinhviens[id-1];
-      }
-
-      ShowStudent(id: number){
-        this.isShowStudent = !this.isShowStudent;
-        console.log(this.isShowStudent);
-        
-        this.idLop = id;
-      }
+      this.isShowStudent[idLop] = !this.isShowStudent[idLop];
+    }
+    
+    console.log(this.isShowStudent[idLop]);
+    
+    this.sinhvienById[idLop] = this.sinhvienArrays;
+    console.log(this.sinhvienById[idLop]);
+    
+  }
 }

@@ -5,8 +5,11 @@ import { TeacherBodyComponent } from './teacher-body/teacher-body.component';
 import { StudentBodyComponent } from './student-body/student-body.component'
 
 const routes: Routes = [
-  {path: 'teacher', component: TeacherBodyComponent},
-  {path: 'student', component: StudentBodyComponent}
+  { path: '', redirectTo: 'teacher', pathMatch: 'full' },
+  { path: 'teacher', component: TeacherBodyComponent },
+  { path: 'student', component: StudentBodyComponent },
+  { path: '**', component: TeacherBodyComponent },
+
 ]
 
 @NgModule({
