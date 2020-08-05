@@ -1,12 +1,13 @@
 <div class="main">
     <div [class]="show()">
         <div class="form">
-            <button (click)="clickButton(1,0)">Add new</button>
-            <form>
-                <label>Tên:</label><input type="text" name="ten">
-                <label>Phone:</label><input type="text" name="phone">
-                <label>Ngày sinh:</label><input type="date" name="ngaysinh">
-                <button>Search</button>
+            <button (click)="clickButton(1,0)" [disabled]="isSearch">Add new</button>
+            <form (ngSubmit)="search(formSearch)" #formSearch="ngForm">
+                <label>Tên:</label><input type="text" name="name" ngModel required>
+                <label>Phone:</label><input type="text" name="phone" ngModel required>
+                <label>Ngày sinh:</label><input type="date" name="birthday" ngModel required>
+                <button [disabled]="formSearch.invalid">Search</button>
+                <button *ngIf="isSearch" (click)="cancel();">Cancel</button>
             </form>
         </div>
         <div class="teacher-body">
@@ -18,6 +19,9 @@
                     <th>Phone</th>
                     <th>Mail</th>
                     <th>Ngày sinh</th>
+                </tr>
+                <tr *ngIf="isNullData" class="nulldata">
+                    <td colspan="6">KHÔNG CÓ DỮ LIỆU TƯƠNG ỨNG TỒN TẠI</td>
                 </tr>
                 <ng-container *ngFor="let teacher of teachers; let i = index">
                     <tr *ngFor="let data of teacher.data; let j = index; let l = count">
@@ -64,7 +68,8 @@
                         <option *ngFor="let khoa of facultys" value="{{ khoa.id }}">{{khoa.name}}</option>
                 </select>
             </p>
+            <button class="button-save" (click)="isShowEdit ? editTeacher(teacherInfo.id) : addTeacher()">Save</button>
         </form>
-        <button class="button-save" (click)="isShowEdit ? editTeacher(teacherInfo.id) : addTeacher()">Save</button>
+
     </div>
 </div>

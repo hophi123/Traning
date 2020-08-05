@@ -8,9 +8,6 @@ import { DataService } from '../header/data.service';
 })
 export class TeacherBodyComponent implements OnInit {
 
-  ngOnInit(): void {
-  }
-
   teachers: any
   newTeacher: any;
   teacherInfo: any;
@@ -26,17 +23,23 @@ export class TeacherBodyComponent implements OnInit {
   key: any;
   groups: any;
   updateItem: any;
-  marvelHeroes: any;
   giangviens: any;
+  filter: any;
+  isSearch = false;
+  isNullData = false;
   constructor(private data: DataService
-  ) {
+  ) { }
+
+  ngOnInit(): void {
     this.facultys = this.data.khoas;
+    this.giangviens = this.data.giangViens;
     this.getGroupTeacher();
     this.updateIndex();
   }
-  getGroupTeacher(){
 
-    this.groups = this.data.giangViens.reduce(function (r, o) {
+  getGroupTeacher() {
+
+    this.groups = this.giangviens.reduce(function (r, o) {
       let groupKey = 0;
       var m = o.khoa;
       (r[m]) ? r[m].data.push(o) : r[m] = { group: Number(groupKey++), data: [o] };
@@ -46,15 +49,15 @@ export class TeacherBodyComponent implements OnInit {
     this.teachers = Object.keys(this.groups).map(k => { return this.groups[k]; });
   }
 
-  updateIndex(){
-    for(let teacher of this.teachers){
+  updateIndex() {
+    for (let teacher of this.teachers) {
 
-      let k = 1+this.length;
+      let k = 1 + this.length;
 
-      for(let i=0, j=k; i<teacher.data.length, j<=teacher.data.length+this.length; i++,j++){
-           teacher.data[i]["index"] = j;
+      for (let i = 0, j = k; i < teacher.data.length, j <= teacher.data.length + this.length; i++, j++) {
+        teacher.data[i]["index"] = j;
       }
-      this.length+=teacher.data.length;
+      this.length += teacher.data.length;
     }
   }
 
@@ -62,7 +65,7 @@ export class TeacherBodyComponent implements OnInit {
     this.key = key;
     this.idStyle = id;
     this.isShow = true;
-    if(this.key == 1){
+    if (this.key == 1) {
       this.teacherInfo = {
         id: '',
         name: '',
@@ -72,37 +75,37 @@ export class TeacherBodyComponent implements OnInit {
         birthday: ''
       }
       this.isShowEdit = false;
-      console.log(this.isShowEdit);
-      
     }
-    if(this.key==2){
-      this.teacherInfo = this.data.giangViens[id-1];
-      this.isShowEdit = true;
-      console.log(this.isShowEdit);
+    if (this.key == 2) {
+      console.log(this.giangviens);
+      for (let gv of this.giangviens) {
+        if (gv.id == id) {
+          this.teacherInfo = gv;
+          console.log('info' + this.teacherInfo);
+          console.log(gv);
+
+          this.isShowEdit = true;
+        }
+      }
     }
-    console.log(this.key);
   }
 
-  addTeacher(){
+  addTeacher() {
     this.newTeacher = {
-    id: ++this.length,
-    name: this.teacherInfo.name,
-    khoa: this.teacherInfo.khoa,
-    phone: this.teacherInfo.phone,
-    mail: this.teacherInfo.mail,
-    birthday: this.teacherInfo.birthday
+      id: ++this.length,
+      name: this.teacherInfo.name,
+      khoa: this.teacherInfo.khoa,
+      phone: this.teacherInfo.phone,
+      mail: this.teacherInfo.mail,
+      birthday: this.teacherInfo.birthday
     }
-    console.log(this.newTeacher);
-    console.log('khoa' +this.newTeacher.khoa);
-    
-    this.data.giangViens.push(this.newTeacher);
+    this.giangviens.push(this.newTeacher);
     this.getGroupTeacher();
     this.length = 0;
     this.updateIndex();
   }
 
-  editTeacher(id: number){
-    console.log(this.data.giangViens);
+  editTeacher(id: number) {
     this.updateItem = {
       id: id,
       name: this.teacherInfo.name,
@@ -112,19 +115,49 @@ export class TeacherBodyComponent implements OnInit {
       birthday: this.teacherInfo.birthday
     }
 
-    this.data.giangViens[id-1] = this.updateItem;
+    for (let gv of this.giangviens) {
+      if (gv.id == id) {
+        gv = this.updateItem;
+      }
+    }
     this.getGroupTeacher();
     this.length = 0;
     this.updateIndex();
-    console.log(this.data.giangViens);
-    
+
   }
 
   show(): String {
-    if(this.isShow){
+    if (this.isShow) {
       return 'container-show';
-    }else{
+    } else {
       return 'container';
     }
+  }
+
+  search(formSearch) {
+
+    this.filter = formSearch.value;
+
+    this.giangviens = this.giangviens.filter(res => {
+      return res.name.toLocaleLowerCase().match(this.filter.name.toLocaleLowerCase())
+        && res.birthday.toLocaleLowerCase().match(this.filter.birthday.toLocaleLowerCase())
+        && res.phone.toLocaleLowerCase().match(this.filter.phone.toLocaleLowerCase());
+    });
+    if(this.giangviens.length == 0){
+      this.isNullData = true;
+    }
+    this.getGroupTeacher();
+    this.length = 0;
+    this.updateIndex();
+    this.isSearch = true;
+  }
+
+  cancel() {
+    this.length = 0;
+    this.ngOnInit();
+    this.isSearch = false;
+    this.isNullData = false;
+    console.log(this.giangviens.length);
+    
   }
 }
