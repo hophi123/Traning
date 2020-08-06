@@ -27,6 +27,7 @@ export class TeacherBodyComponent implements OnInit {
   filter: any;
   isSearch = false;
   isNullData = false;
+  index: any;
   constructor(private data: DataService
   ) { }
 
@@ -77,52 +78,62 @@ export class TeacherBodyComponent implements OnInit {
       this.isShowEdit = false;
     }
     if (this.key == 2) {
-      console.log(this.giangviens);
       for (let gv of this.giangviens) {
         if (gv.id == id) {
           this.teacherInfo = gv;
-          console.log('info' + this.teacherInfo);
-          console.log(gv);
-
           this.isShowEdit = true;
         }
       }
     }
   }
 
-  addTeacher() {
+  addTeacher(formSave) {
     this.newTeacher = {
       id: ++this.length,
-      name: this.teacherInfo.name,
-      khoa: this.teacherInfo.khoa,
-      phone: this.teacherInfo.phone,
-      mail: this.teacherInfo.mail,
-      birthday: this.teacherInfo.birthday
+      name: formSave.value.name,
+      khoa: formSave.value.khoa,
+      phone: formSave.value.phone,
+      mail: formSave.value.mail,
+      birthday: formSave.value.birthday
     }
-    this.giangviens.push(this.newTeacher);
+    this.data.giangViens.push(this.newTeacher);
+    this.giangviens = this.data.giangViens;
     this.getGroupTeacher();
     this.length = 0;
     this.updateIndex();
   }
 
-  editTeacher(id: number) {
+  editTeacher(id: number, formSave) {
+    console.log(this.isSearch);
+    
+    this.index = this.data.giangViens.indexOf(this.teacherInfo);
     this.updateItem = {
       id: id,
-      name: this.teacherInfo.name,
-      khoa: this.teacherInfo.khoa,
-      phone: this.teacherInfo.phone,
-      mail: this.teacherInfo.mail,
-      birthday: this.teacherInfo.birthday
+      //index: this.teacherInfo.index,
+      name: formSave.value.name,
+      khoa: formSave.value.khoa,
+      phone: formSave.value.phone,
+      mail: formSave.value.mail,
+      birthday: formSave.value.birthday
+    }
+    if (this.isSearch) {
+      console.log(this.giangviens);
+      
+      this.data.giangViens[this.index] = this.updateItem; // gán giá trị update cho giá trị ban đầu
+      this.giangviens[this.index] = this.updateItem;
+      this.teacherInfo = this.updateItem; // sau mỗi lần save update lại giá trị để bấm save nhiều lần
+      this.getGroupTeacher();
+      this.length = 0;
+      this.updateIndex();
+    } else {
+      this.data.giangViens[this.index] = this.updateItem; // gán giá trị update cho giá trị ban đầu
+      this.giangviens = this.data.giangViens;
+      this.teacherInfo = this.updateItem; // sau mỗi lần save update lại giá trị để bấm save nhiều lần
+      this.getGroupTeacher();
+      this.length = 0;
+      this.updateIndex();
     }
 
-    for (let gv of this.giangviens) {
-      if (gv.id == id) {
-        gv = this.updateItem;
-      }
-    }
-    this.getGroupTeacher();
-    this.length = 0;
-    this.updateIndex();
 
   }
 
@@ -138,14 +149,20 @@ export class TeacherBodyComponent implements OnInit {
 
     this.filter = formSearch.value;
 
-    this.giangviens = this.giangviens.filter(res => {
+    this.giangviens = this.data.giangViens.filter(res => {
       return res.name.toLocaleLowerCase().match(this.filter.name.toLocaleLowerCase())
         && res.birthday.toLocaleLowerCase().match(this.filter.birthday.toLocaleLowerCase())
         && res.phone.toLocaleLowerCase().match(this.filter.phone.toLocaleLowerCase());
     });
-    if(this.giangviens.length == 0){
+    if (this.giangviens.length == 0) {
       this.isNullData = true;
+      this.isShow = false;
+    }else{
+      this.isNullData = false;
+      this.isShow = false;
     }
+    console.log(this.giangviens);
+
     this.getGroupTeacher();
     this.length = 0;
     this.updateIndex();
@@ -154,10 +171,12 @@ export class TeacherBodyComponent implements OnInit {
 
   cancel() {
     this.length = 0;
-    this.ngOnInit();
+    this.giangviens = this.data.giangViens;
+    this.getGroupTeacher();
+    this.updateIndex();
     this.isSearch = false;
     this.isNullData = false;
     console.log(this.giangviens.length);
-    
+
   }
 }

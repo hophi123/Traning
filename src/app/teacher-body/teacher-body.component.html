@@ -30,14 +30,14 @@
                                 <td>{{data.index}}</td>
                                 <td [ngStyle]="{'background-color': isShow == true && data.id == idStyle ? '#ACF5E1' : ''}" (click)="clickButton(2,data.id);">{{data.name | uppercase}}</td>
                                 <td [rowSpan]="l">{{facultys[data.khoa-1].name}}</td>
-                                <td>{{data.phone}}</td>
+                                <td>{{data.phone | phone}}</td>
                                 <td>{{data.mail}}</td>
                                 <td>{{data.birthday | date:"yyyy/MM/dd"}}</td>
                             </ng-container>
                             <ng-container *ngSwitchDefault>
                                 <td>{{data.index}}</td>
                                 <td [ngStyle]="{'background-color': isShow == true && data.id == idStyle ? '#ACF5E1' : ''}" (click)="clickButton(2,data.id)">{{data.name | uppercase}}</td>
-                                <td>{{data.phone}}</td>
+                                <td>{{data.phone | phone}}</td>
                                 <td>{{data.mail}}</td>
                                 <td>{{data.birthday | date:"yyyy/MM/dd"}}</td>
                             </ng-container>
@@ -49,26 +49,26 @@
     </div>
     <div *ngIf="isShow" class="popup">
         <button class="button-x" (click)="isShow=false">X</button>
-        <form>
+        <form #formSave="ngForm">
             <p>
-                <label>Tên:</label><input type="text" name="teacherInfo.name" [(ngModel)]="teacherInfo.name"><br>
+                <label>Tên:</label><input type="text" name="name" [ngModel]="teacherInfo.name" required><br>
             </p>
             <p>
-                <label>Phone:</label><input type="text" name="teacherInfo.phone" [(ngModel)]="teacherInfo.phone"><br>
+                <label>Phone:</label><input type="text" name="phone" [ngModel]="teacherInfo.phone" required><br>
             </p>
             <p>
-                <label>Mail:</label><input type="text" name="teacherInfo.mail" [(ngModel)]="teacherInfo.mail"><br>
+                <label>Mail:</label><input type="text" name="mail" [ngModel]="teacherInfo.mail" required><br>
             </p>
             <p>
-                <label>Ngày sinh:</label><input type="date" name="teacherInfo.birthday" [(ngModel)]="teacherInfo.birthday"><br>
+                <label>Ngày sinh:</label><input type="date" name="birthday" [ngModel]="teacherInfo.birthday" required><br>
             </p>
             <p>
                 <label>Khoa:</label>
-                <select [(ngModel)]="teacherInfo.khoa" name="khoa">
-                        <option *ngFor="let khoa of facultys" value="{{ khoa.id }}">{{khoa.name}}</option>
+                <select [ngModel]="teacherInfo.khoa" name="khoa">
+                        <option *ngFor="let khoa of facultys" value="{{ khoa.id }}" required>{{khoa.name}}</option>
                 </select>
             </p>
-            <button class="button-save" (click)="isShowEdit ? editTeacher(teacherInfo.id) : addTeacher()">Save</button>
+            <button [disabled]="formSave.invalid" class="button-save" (click)="isShowEdit ? editTeacher(teacherInfo.id, formSave) : addTeacher(formSave)" required>Save</button>
         </form>
 
     </div>

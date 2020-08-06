@@ -54,12 +54,9 @@
             </p>
             <p>
                 <label>Khoa:</label>
-                <select>
-                    <ng-container *ngFor="let khoa of khoas ">
-                        <option *ngIf="studentInfo.khoa==khoa.id " selected>{{khoa.name}}</option>
-                        <option *ngIf="studentInfo.khoa !=khoa.id ">{{khoa.name}}</option>
-                    </ng-container>
-                </select>
+                <select [ngModel]="studentInfo.khoa" name="khoa">
+                    <option *ngFor="let khoa of khoas" value="{{ khoa.id }}" required>{{khoa.name}}</option>
+            </select>
             </p>
             <p>
                 <label>Lớp:</label><input type="text " value={{lops[studentInfo.lop-1].name}}><br>

@@ -5,7 +5,7 @@
     .teacher-body table,
     th,
     td {
-        border: 1px solid;
+        border: 1px solid black;
     }
     
     .teacher-body table {
@@ -70,7 +70,7 @@
         float: right;
         width: 30%;
         background-color: #E8E8E8;
-        height: 521px;
+        height: 555px;
     }
     
     .button-x {
